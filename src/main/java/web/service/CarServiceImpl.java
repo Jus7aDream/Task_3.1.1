@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CarServiceImpl implements CarService {
-    private List<Car> cars = new ArrayList<>();
-
-    public List<Car> getAllCars() {
+    @Override
+    public List<Car> addCars() {
+        List<Car> cars = new ArrayList<>();
         cars.add(new Car(1974, "PORSCHE TURBO 3.0", 911));
         cars.add(new Car(1977, "PORSCHE TURBO 3.3", 930));
         cars.add(new Car(1990, "PORSCHE TURBO", 964));
@@ -20,8 +20,8 @@ public class CarServiceImpl implements CarService {
         return cars;
     }
 
-    public List<Car> carsCount(List<Car> cars, int number) {
-        if (number == 0 || number > 7) return cars;
-        return cars.stream().limit(number).collect(Collectors.toList());
+    @Override
+    public List<Car> getAllCars(Integer count) {
+        return addCars().stream().limit(count).collect(Collectors.toList());
     }
 }
