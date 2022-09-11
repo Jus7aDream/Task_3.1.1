@@ -1,6 +1,6 @@
-package web.service;
+package com.artour.service;
 
-import web.model.Car;
+import com.artour.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;

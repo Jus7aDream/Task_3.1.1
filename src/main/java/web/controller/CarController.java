@@ -4,8 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import web.service.CarService;
-import web.service.CarServiceImpl;
+import com.artour.service.CarService;
+import com.artour.service.CarServiceImpl;
 
 @Controller
 public class CarController {

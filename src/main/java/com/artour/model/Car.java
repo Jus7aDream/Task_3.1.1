@@ -1,4 +1,4 @@
-package web.model;
+package com.artour.model;
 
 public class Car {
     private final int year;
