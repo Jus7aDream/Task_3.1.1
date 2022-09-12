@@ -9,7 +9,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> addUsers() {
         List<User> users = new ArrayList<>();
-        users.add(new User(1,"Abu Bakr al-Siddiq", 573, 634, 63,"first Righteous Caliph"));
+        users.add(new User(1,"Abu Bakr al-Siddiq", 573, 634, 61,"first Righteous Caliph"));
         users.add(new User(2,"Umar ibn al-Khattab", 590, 644,54,"second Righteous Caliph"));
         users.add(new User(3,"Usman ibn Affan", 574, 656,82,"third Righteous Caliph"));
         users.add(new User(4,"Ali ibn Abu Talib", 600, 661,61,"4th Righteous Caliph"));
