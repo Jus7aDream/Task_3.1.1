@@ -4,7 +4,10 @@ import com.artour.dao.UserDAO;
 import com.artour.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @ In the name of Allah, most gracious and most merciful! 19.09.2022
@@ -38,31 +41,37 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public String createUser(@ModelAttribute("user") User user) {
+    public String createUser(@ModelAttribute("user") @Valid User user,
+                             BindingResult bindingResult) {
+        if(bindingResult.hasErrors())
+            return "/userCard";
         userDAO.addUser(user);
         return "redirect:/users";
     }
 
     @GetMapping("/users/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userDAO.getUserById(id));
         return "show";
     }
 
     @GetMapping("/users/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
+    public String edit(Model model, @PathVariable("id") long id) {
         model.addAttribute("user", userDAO.getUserById(id));
         return "edit";
     }
 
     @PatchMapping("/users/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+    public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
+                         @PathVariable("id") long id) {
+        if(bindingResult.hasErrors())
+            return "/edit";
         userDAO.updateUser(id, user);
         return "redirect:/users";
     }
 
     @DeleteMapping("/users/{id}")
-    public String delete(@PathVariable("id") int id) {
+    public String delete(@PathVariable("id") long id) {
         userDAO.deleteUser(id);
         return "redirect:/users";
     }
