@@ -1,6 +1,10 @@
 package com.artour.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 /**
  * @ In the name of Allah, most gracious and most merciful 12.09.2022
@@ -10,35 +14,42 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
-
-    @Column(name="name")
+    @Column(name = "id")
+    private long id;
+    @NotEmpty(message = "Name should not be empty")
+    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="surname")
-    private String surname;
+    @NotEmpty(message = "Nickname should not be empty")
+    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @Column(name = "nickname")
+    private String nickname;
 
-    @Column(name="department")
-    private String department;
+    @Min(value = 0, message = "Age should be greater than 0")
+    @Column(name = "age")
+    private int age;
 
-    @Column(name="salary")
-    private int salary;
+    @NotEmpty(message = "Email should be not empty")
+    @Email(message = "Email should be valid")
+    @Column(name = "email")
+    private String email;
 
-    public User() {}
-
-    public User(String name, String surname, String department, int salary) {
-        this.name = name;
-        this.surname = surname;
-        this.department = department;
-        this.salary = salary;
+    public User() {
     }
 
-    public int getId() {
+    public User(String name, String nickname, int age, String email) {
+        this.name = name;
+        this.nickname = nickname;
+        this.email = email;
+        this.age = age;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -50,27 +61,27 @@ public class User {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public String getDepartment() {
-        return department;
+    public int getAge() {
+        return age;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public int getSalary() {
-        return salary;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
