@@ -45,43 +45,32 @@ public class User {
         this.age = age;
     }
 
-    public long getId() {
-        return id;
+    public User(long id, String name, String nickname, int age, String email) {
+        this.id = id;
+        this.name = name;
+        this.nickname = nickname;
+        this.age = age;
+        this.email = email;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public long getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getNickname() {
         return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }
