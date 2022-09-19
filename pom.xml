@@ -73,7 +73,7 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        <!--        hibernate-->
+        <!--        hibernate.properties-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>

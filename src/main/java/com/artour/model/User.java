@@ -9,32 +9,29 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
-    @Column(name = "number")
-    private int number;
-    @Column(name = "name")
+
+    @Column(name="name")
     private String name;
-    @Column(name = "born")
-    private int born;
-    @Column(name = "died")
-    private int died;
-    @Column(name = "age")
-    private int age;
-    @Column(name = "note")
-    private String note;
 
-    public User() {
-    }
+    @Column(name="surname")
+    private String surname;
 
-    public User(int number, String name, int born, int died, int age, String note) {
-        this.number = number;
+    @Column(name="department")
+    private String department;
+
+    @Column(name="salary")
+    private int salary;
+
+    public User() {}
+
+    public User(String name, String surname, String department, int salary) {
         this.name = name;
-        this.born = born;
-        this.died = died;
-        this.age = age;
-        this.note = note;
+        this.surname = surname;
+        this.department = department;
+        this.salary = salary;
     }
 
     public int getId() {
@@ -45,14 +42,6 @@ public class User {
         this.id = id;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     public String getName() {
         return name;
     }
@@ -61,40 +50,27 @@ public class User {
         this.name = name;
     }
 
-    public int getBorn() {
-        return born;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setBorn(int born) {
-        this.born = born;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public int getDied() {
-        return died;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDied(int died) {
-        this.died = died;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
-    public int getAge() {
-        return age;
+    public int getSalary() {
+        return salary;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    @Override
-    public String toString() {
-        return id + " " + number + " " + name + " " + born + " " + died + " " + age + " " + note;
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 }
