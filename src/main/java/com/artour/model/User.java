@@ -15,6 +15,12 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,79 +30,25 @@ public class User {
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     @Column(name = "name")
+    @NonNull
     private String name;
 
     @NotEmpty(message = "Nickname should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     @Column(name = "nickname")
+    @NonNull
     private String nickname;
 
     @Min(value = 0, message = "Age should be greater than 0")
     @Column(name = "age")
+    @NonNull
     private int age;
 
     @NotEmpty(message = "Email should be not empty")
     @Email(message = "Email should be valid")
     @Column(name = "email")
+    @NonNull
     private String email;
-
-    public User() {
-    }
-
-    public User(String name, String nickname, int age, String email) {
-        this.name = name;
-        this.nickname = nickname;
-        this.age = age;
-        this.email = email;
-    }
-
-    public User(Long id, String name, String nickname, int age, String email) {
-        this.id = id;
-        this.name = name;
-        this.nickname = nickname;
-        this.age = age;
-        this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     @Override
     public boolean equals(Object o) {
