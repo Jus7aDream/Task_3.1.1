@@ -19,7 +19,6 @@ import java.util.Objects;
 @Setter
 @ToString
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 public class User {
     @Id
@@ -30,24 +29,20 @@ public class User {
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     @Column(name = "name")
-    @NonNull
     private String name;
 
     @NotEmpty(message = "Nickname should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     @Column(name = "nickname")
-    @NonNull
     private String nickname;
 
     @Min(value = 0, message = "Age should be greater than 0")
     @Column(name = "age")
-    @NonNull
     private int age;
 
     @NotEmpty(message = "Email should be not empty")
     @Email(message = "Email should be valid")
     @Column(name = "email")
-    @NonNull
     private String email;
 
     @Override
