@@ -1,12 +1,14 @@
 package com.artour.model;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 /**
  * @ In the name of Allah, most gracious and most merciful 12.09.2022
@@ -18,6 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     @Column(name = "name")
@@ -39,19 +42,20 @@ public class User {
 
     public User() {
     }
-    public User(Long id, String name, String nickname, int age, String email) {
-        this.id = id;
+
+    public User(String name, String nickname, int age, String email) {
         this.name = name;
         this.nickname = nickname;
         this.age = age;
         this.email = email;
     }
 
-        public User(String name, String nickname, int age, String email) {
+    public User(Long id, String name, String nickname, int age, String email) {
+        this.id = id;
         this.name = name;
         this.nickname = nickname;
-        this.email = email;
         this.age = age;
+        this.email = email;
     }
 
     public Long getId() {
@@ -92,5 +96,18 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
