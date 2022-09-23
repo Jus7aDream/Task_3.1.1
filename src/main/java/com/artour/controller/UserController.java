@@ -2,7 +2,7 @@ package com.artour.controller;
 
 import com.artour.model.User;
 import com.artour.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,14 +14,10 @@ import javax.validation.Valid;
  * @ In the name of Allah, most gracious and most merciful! 19.09.2022
  */
 @Controller
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping()
     public String start() {
