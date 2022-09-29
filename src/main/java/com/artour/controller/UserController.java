@@ -21,7 +21,7 @@ public class UserController {
 
     @GetMapping()
     public String start() {
-        return "index";
+        return "started";
     }
 
     @GetMapping("/users")

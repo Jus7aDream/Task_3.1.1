@@ -1,7 +1,7 @@
 package com.artour.service;
 
-import com.artour.dao.UserDAO;
 import com.artour.model.User;
+import com.artour.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,32 +13,38 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserDAO userDAO;
+    private final UserRepo userRepo;
 
     @Override
     @Transactional(readOnly = true)
     public List<User> getAllUsers() {
-        return userDAO.getAllUsers();
+        return userRepo.findAll();
     }
 
     @Override
     public void addUser(User user) {
-        userDAO.addUser(user);
+        userRepo.save(user);
     }
 
     @Override
     @Transactional(readOnly = true)
     public User getUserById(Long id) {
-        return userDAO.getUserById(id);
+        return userRepo.findById(id).orElse(null);
     }
 
     @Override
     public void updateUser(Long id, User updatedUser) {
-        userDAO.updateUser(id, updatedUser);
+        User user = userRepo.findById(id).orElse(null);
+        if(user.getId()==null){
+            userRepo.save(updatedUser);
+        }else {
+            userRepo.save(updatedUser);
+        }
+
     }
 
     @Override
     public void deleteUser(Long id) {
-        userDAO.deleteUser(id);
+        userRepo.deleteById(id);
     }
 }
