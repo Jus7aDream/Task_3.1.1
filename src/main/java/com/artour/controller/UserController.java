@@ -21,7 +21,20 @@ public class UserController {
 
     @GetMapping()
     public String start() {
-        return "started";
+        return "index";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+    @GetMapping("/user")
+    public String user(Model model) {
+//        User user = new User();
+//        Long userId = user.getId();
+//        user = userService.getUserById(userId);
+//        model.addAttribute("user", user);
+        return "user";
     }
 
     @GetMapping("/users")
@@ -40,7 +53,7 @@ public class UserController {
     public String createUser(@ModelAttribute("user")
                              @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "/userCard";
+            return "userCard";
         userService.addUser(user);
         return "redirect:/users";
     }
@@ -48,7 +61,7 @@ public class UserController {
     @GetMapping("/users/{id}")
     public String show(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "show";
+        return "user_id";
     }
 
     @GetMapping("/users/{id}/edit")

@@ -1,10 +1,10 @@
 package com.artour.model;
 
 import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
+import javax.validation.constraints.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -20,21 +20,28 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Slf4j
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
+    @NotEmpty(message = "Username should not be empty")
+    @Size(min = 3, max = 255, message = "Username should be between 3 and 255 characters")
+    @Column(name = "username")
+    private String username;
+
+    @NotEmpty(message = "Password should not be empty")
+    @Size(min = 3, max = 255, message = "Password should be between 3 and 255 characters")
+    @Column(name = "password")
+    private String password;
+
     @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 255, message = "Name should be between 2 and 255 characters")
+    @Size(min = 3, max = 255, message = "Name should be between 3 and 255 characters")
     @Column(name = "name")
     private String name;
 
-    @NotEmpty(message = "Nickname should not be empty")
-    @Size(min = 2, max = 255, message = "Name should be between 2 and 255 characters")
-    @Column(name = "nickname")
-    private String nickname;
 
     @Min(value = 0, message = "Age should be greater than 0")
     @Column(name = "age")
@@ -48,13 +55,13 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id != null && Objects.equals(id, user.id);
+        return age == user.age && Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(name, user.name) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(id, username, password, name, age, email);
     }
 }
