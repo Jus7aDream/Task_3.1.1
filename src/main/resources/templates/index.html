@@ -6,9 +6,14 @@
 </head>
 <body>
 <h1>HomePage</h1>
+<form th:method="GET" th:action="@{/}">
+    <input type="submit" value="HOME"/>
+</form>
+<br>
 <form th:method="GET" th:action="@{/admin}">
     <input type="submit" value="ADMIN"/>
 </form>
+<br>
 <form th:method="GET" th:action="@{/user}">
     <input type="submit" value="USER"/>
 </form>

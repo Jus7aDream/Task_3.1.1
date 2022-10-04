@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService {
         } else {
             userRepo.save(updatedUser);
         }
-
     }
 
     @Override

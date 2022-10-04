@@ -9,8 +9,13 @@
 <form th:method="GET" th:action="@{/}">
     <input type="submit" value="HOME"/>
 </form>
-<form th:method="GET" th:action="@{/users}">
+<br>
+<form th:method="GET" th:action="@{/api/users}">
     <input type="submit" value="CRUD"/>
+</form>
+<br>
+<form th:method="GET" th:action="@{/user}">
+    <input type="submit" value="USER"/>
 </form>
 </body>
 </html>

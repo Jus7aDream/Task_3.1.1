@@ -11,78 +11,54 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 /**
- * @ In the name of Allah, most gracious and most merciful! 19.09.2022
+ * @ In the name of Allah, most gracious and most merciful! 04.10.2022
  */
 @Controller
 @RequiredArgsConstructor
-public class UserController {
-
+@RequestMapping("api")
+public class ApiController {
     private final UserService userService;
-
-    @GetMapping()
-    public String start() {
-        return "index";
-    }
-
-    @GetMapping("/admin")
-    public String admin() {
-        return "admin";
-    }
-    @GetMapping("/user")
-    public String user(Model model) {
-//        User user = new User();
-//        Long userId = user.getId();
-//        user = userService.getUserById(userId);
-//        model.addAttribute("user", user);
-        return "user";
-    }
-
-    @GetMapping("/users")
+    @GetMapping("users")
     public String showAllUsers(Model model) {
         model.addAttribute("allUsers", userService.getAllUsers());
-        return "users";
+        return "api/users";
     }
-
-    @GetMapping("/userCard")
+    @GetMapping("userCard")
     public String userCard(Model model) {
         model.addAttribute("user", new User());
-        return "userCard";
+        return "api/userCard";
     }
-
-    @PostMapping("/users")
+    @PostMapping("users")
     public String createUser(@ModelAttribute("user")
                              @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "userCard";
+            return "/api/userCard";
         userService.addUser(user);
-        return "redirect:/users";
+        return "redirect:/api/users";
     }
-
-    @GetMapping("/users/{id}")
+    @GetMapping("users/{id}")
     public String show(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "user_id";
+        return "api/user_id";
     }
-
-    @GetMapping("/users/{id}/edit")
+    @GetMapping("users/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.getUserById(id));
-        return "edit";
+        return "api/edit";
     }
 
-    @PatchMapping("/users/{id}")
+    @PatchMapping("users/{id}")
     public String update(@ModelAttribute("user")
                          @Valid User user, BindingResult bindingResult,
                          @PathVariable("id") Long id) {
         if (bindingResult.hasErrors())
-            return "/edit";
+            return "api/edit";
         userService.updateUser(id, user);
-        return "redirect:/users";
+        return "redirect:/api/users";
     }
-
     @DeleteMapping("/users/{id}")
     public String delete(@PathVariable("id") Long id) {
         userService.deleteUser(id);
-        return "redirect:/users";
+        return "redirect:/api/users";
     }
 }

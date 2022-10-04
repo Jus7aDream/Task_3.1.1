@@ -7,6 +7,10 @@
 <body>
 <h2>Users List</h2>
 <br>
+<form th:method="GET" th:action="@{/}">
+    <input type="submit" value="HOME"/>
+</form>
+<br>
 <table>
     <thead>
     <tr>
@@ -15,6 +19,7 @@
         <th scope="col">Age</th>
         <th scope="col">Email</th>
         <th scope="col">Username</th>
+        <th scope="col">Password</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
     </tr>
@@ -26,14 +31,15 @@
         <td th:text="${user.age}">
         <td th:text="${user.email}">
         <td th:text="${user.username}">
+        <td th:text="${user.password}">
         </td>
         <td>
-            <form th:action="@{/users/{id}/edit(id=${user.getId()})}">
+            <form th:action="@{/api/users/{id}/edit(id=${user.getId()})}">
                 <button>Edit user</button>
             </form>
         </td>
         <td>
-            <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+            <form th:method="DELETE" th:action="@{/api/users/{id}(id=${user.getId()})}">
                 <input type="submit" value="Delete user"/>
             </form>
         </td>
@@ -41,7 +47,8 @@
     </tbody>
 </table>
 <br>
-<input type="button" value="Add new user"
-       onclick="window.location.href = 'userCard'"/>
+<form th:method="GET" th:action="@{/api/userCard}">
+    <input type="submit" value="Add new user"/>
+</form>
 </body>
 </html>
